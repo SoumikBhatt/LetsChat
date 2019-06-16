@@ -10,7 +10,7 @@
                 android:paddingTop="@dimen/activity_vertical_margin">
 
     <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab"
+            android:id="@+id/fbtn_fab"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
@@ -23,20 +23,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/fab">
+            android:layout_toLeftOf="@id/fbtn_fab">
 
         <EditText
-                android:id="@+id/input"
+                android:id="@+id/et_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Input" />
     </android.support.design.widget.TextInputLayout>
 
     <ListView
-            android:id="@+id/list"
+            android:id="@+id/lv_all_messages"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@id/fab"
+            android:layout_above="@id/fbtn_fab"
             android:layout_alignParentTop="true"
             android:layout_marginBottom="16dp"
             android:divider="@android:color/transparent"

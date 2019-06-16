@@ -7,7 +7,7 @@
 
 >
         <TextView
-                android:id="@+id/tv_sent_user"
+                android:id="@+id/tv_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -18,7 +18,7 @@
                 android:layout_centerVertical="true"/>
 
         <TextView
-                android:id="@+id/tv_sent_msg_body"
+                android:id="@+id/tv_msg_body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -28,16 +28,16 @@
                 android:layout_marginTop="33dp"
                 android:textColor="@android:color/white"
                 android:background="@drawable/round_corner_sent"
-                android:layout_below="@id/tv_sent_user"
+                android:layout_below="@id/tv_user"
                 android:padding="5dp"
                 android:layout_centerVertical="true"/>
 
         <TextView
-                android:id="@+id/tv_sent_message_time"
+                android:id="@+id/tv_message_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3dp"
-                android:layout_below="@id/tv_sent_msg_body"
+                android:layout_below="@id/tv_msg_body"
                 android:text="6.00PM"
                 android:textColor="#424242"
                 android:padding="3dp"/>
