@@ -3,6 +3,7 @@ package com.soumik.letschat.adapter
 import android.app.Activity
 import android.os.Parcel
 import android.os.Parcelable
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import com.firebase.ui.database.FirebaseListAdapter
@@ -27,6 +28,8 @@ class MessageAdapter(var activity: MainActivity,  modelLayout:Int,
 
         messageBody?.text = model?.messageBody
         messageUser?.text = model?.messageUser
+
+        Log.i("AAASS",""+messageBody)
 
         var currentDateTime = SimpleDateFormat("dd-MM-yyyy (HH:mm:ss)")
 

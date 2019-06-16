@@ -4,8 +4,10 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
 import com.firebase.ui.auth.AuthUI
+import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.soumik.letschat.Apputils.showToast
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
 
+        FirebaseApp.initializeApp(this)
+
         if(FirebaseAuth.getInstance().currentUser==null){
             startActivityForResult(AuthUI.getInstance().createSignInIntentBuilder().build(),
                 SIGN_IN_REQUEST_CODE
@@ -35,7 +39,21 @@ class MainActivity : AppCompatActivity() {
             showMessages()
         }
 
-
+        fbtn_fab.setOnClickListener{
+            if (TextUtils.isEmpty(et_input.text.toString())){
+                showToast(applicationContext,"Please fill the field")
+            } else {
+                FirebaseDatabase.getInstance()
+                    .reference
+                    .push()
+                    .setValue(
+                        Messages(et_input.text.toString(),
+                        FirebaseAuth.getInstance().currentUser?.displayName!!,
+                        FirebaseAuth.getInstance().currentUser?.uid!!)
+                    )
+                et_input.setText("")
+            }
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -53,9 +71,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun showMessages() {
 
-        currentUserName = FirebaseAuth.getInstance().currentUser!!.uid
+        currentUserName = FirebaseAuth.getInstance().currentUser?.displayName!!
 
-        Log.i("11",""+currentUserName)
+        Log.i("AAASS",""+currentUserName)
 
         var adapter = MessageAdapter(this,R.layout.item_send_msg,Messages::class.java,FirebaseDatabase.getInstance().reference)
         lv_all_messages.adapter = adapter
