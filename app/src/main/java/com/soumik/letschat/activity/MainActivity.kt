@@ -6,15 +6,22 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.TextView
 import com.firebase.ui.auth.AuthUI
+import com.firebase.ui.database.FirebaseListAdapter
 import com.google.firebase.FirebaseApp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.soumik.letschat.Apputils.showToast
 import com.soumik.letschat.R
-import com.soumik.letschat.adapter.MessageAdapter
 import com.soumik.letschat.model.Messages
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_send_msg.view.*
+import java.text.DateFormat
+import java.text.SimpleDateFormat
 
 class MainActivity : AppCompatActivity() {
 
@@ -43,6 +50,7 @@ class MainActivity : AppCompatActivity() {
             if (TextUtils.isEmpty(et_input.text.toString())){
                 showToast(applicationContext,"Please fill the field")
             } else {
+
                 FirebaseDatabase.getInstance()
                     .reference
                     .push()
@@ -69,13 +77,46 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        menuInflater.inflate(R.menu.menu_sign_out,menu)
+
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+
+        if (item?.itemId==R.id.menu_sout){
+
+            AuthUI.getInstance().signOut(this).addOnCompleteListener{
+                showToast(applicationContext,"Signed Out Successfully")
+                finish()
+            }
+        }
+
+        return true
+    }
+
     private fun showMessages() {
 
         currentUserName = FirebaseAuth.getInstance().currentUser?.displayName!!
 
         Log.i("AAASS",""+currentUserName)
 
-        var adapter = MessageAdapter(this,R.layout.item_send_msg,Messages::class.java,FirebaseDatabase.getInstance().reference)
+        var adapter = object:  FirebaseListAdapter<Messages>(this,Messages::class.java,R.layout.item_send_msg,FirebaseDatabase.getInstance().reference){
+            override fun populateView(v: View?, model: Messages?, position: Int) {
+                val messageBody : TextView =  v?.findViewById(R.id.tv_msg_body)!!
+                val messageUser = v?.tv_user
+                val messageTime = v?.tv_message_time
+
+                messageBody?.text = model?.messageBody
+                messageUser?.text = model?.messageUser
+
+                Log.i("AAASS",""+messageBody)
+
+                messageTime?.text = android.text.format.DateFormat.format("dd-MM-yyyy (HH:mm:ss)",model?.messageTime!!)
+            }
+        }
         lv_all_messages.adapter = adapter
     }
 

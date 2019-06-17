@@ -5,29 +5,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-    <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fbtn_fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true"
-            android:src="@drawable/ic_send"
-            android:tint="@android:color/white"
-            app:fabSize="mini" />
 
-    <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_toLeftOf="@id/fbtn_fab">
+        <android.support.design.widget.FloatingActionButton
+                android:id="@+id/fbtn_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_send"
+                android:tint="@android:color/white"
+                app:fabSize="mini"/>
 
-        <EditText
-                android:id="@+id/et_input"
+        <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Input" />
-    </android.support.design.widget.TextInputLayout>
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@id/fbtn_fab">
 
+            <EditText
+                    android:id="@+id/et_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Input"/>
+        </android.support.design.widget.TextInputLayout>
     <ListView
             android:id="@+id/lv_all_messages"
             android:layout_width="match_parent"
@@ -38,5 +38,5 @@
             android:divider="@android:color/transparent"
             android:dividerHeight="16dp"
             android:stackFromBottom="true"
-            android:transcriptMode="alwaysScroll" />
+            android:transcriptMode="alwaysScroll"/>
 </RelativeLayout>
