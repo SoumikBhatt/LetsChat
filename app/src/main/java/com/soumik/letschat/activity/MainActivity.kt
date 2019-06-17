@@ -100,8 +100,11 @@ class MainActivity : AppCompatActivity() {
     private fun showMessages() {
 
         currentUserName = FirebaseAuth.getInstance().currentUser?.displayName!!
+        var image = FirebaseAuth.getInstance().currentUser?.photoUrl
+
 
         Log.i("AAASS",""+currentUserName)
+        Log.i("AAAASSS",""+image)
 
         var adapter = object:  FirebaseListAdapter<Messages>(this,Messages::class.java,R.layout.item_send_msg,FirebaseDatabase.getInstance().reference){
             override fun populateView(v: View?, model: Messages?, position: Int) {
@@ -120,8 +123,8 @@ class MainActivity : AppCompatActivity() {
         lv_all_messages.adapter = adapter
     }
 
-    fun getCurrentUser():String{
-
-        return currentUserName
-    }
+//    fun getCurrentUser():String{
+//
+//        return currentUserName
+//    }
 }
